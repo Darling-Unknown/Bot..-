@@ -11,6 +11,9 @@
  */
 require('./settings')
 const { Boom } = require('@hapi/boom')
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 const fs = require('fs')
 const chalk = require('chalk')
 const FileType = require('file-type')
@@ -283,3 +286,9 @@ fs.watchFile(file, () => {
     delete require.cache[file]
     require(file)
 })
+app.get('/',(req, res) => {
+    res.send("Bot is Running 🎉🎉🤝");
+});
+app.listen(PORT, () => {
+console.log('Server Is Running');
+});
