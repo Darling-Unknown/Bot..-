@@ -73,7 +73,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 
 async function startXeonBotInc() {
 let { version, isLatest } = await fetchLatestBaileysVersion()
-const { state, saveCreds } = await useMultiFileAuthState(./session)
+const { state, saveCreds } = await useMultiFileAuthState(/session)
 const msgRetryCounterCache = new NodeCache()
 
 const XeonBotInc = makeWASocket({  
