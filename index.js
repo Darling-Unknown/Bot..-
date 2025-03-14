@@ -1,14 +1,20 @@
-/**
- * Knight Bot - A WhatsApp Bot
- * Copyright (c) 2024 Professor
- * 
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the MIT License.
- * 
- * Credits:
- * - Baileys Library by @adiwajshing
- * - Pair Code implementation inspired by TechGod143 & DGXEON
- */
+
+const express = require("express");
+const app = express();
+
+// Create a simple web server to prevent sleeping
+app.get("/", (req, res) => {
+  res.send("Knight Bot is running...");
+});
+
+// Run server on a specific port (Render will assign one)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
+
+
 require('./settings')
 const { Boom } = require('@hapi/boom')
 const fs = require('fs')
@@ -16,12 +22,6 @@ const chalk = require('chalk')
 const FileType = require('file-type')
 const path = require('path')
 const axios = require('axios')
-const express = require('express');
-const PORT = process.env.PORT || 3000;
-const app = express();
-// Keep Alive Route
-
-
 const { handleMessages, handleGroupParticipantUpdate, handleStatus } = require('./main');
 const PhoneNumber = require('awesome-phonenumber')
 const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
@@ -72,8 +72,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 
 async function startXeonBotInc() {
 let { version, isLatest } = await fetchLatestBaileysVersion()
-const { state, saveCreds } =
- await useMultiFileAuthState(./session)
+const { state, saveCreds } = await useMultiFileAuthState(./session)
 const msgRetryCounterCache = new NodeCache()
 
 const XeonBotInc = makeWASocket({  
@@ -265,23 +264,20 @@ XeonBotInc.ev.on('messages.reaction', async (status) => {
 return XeonBotInc
 
 }
-
-// Start the bot with error handling
+// Start bot function
 startXeonBotInc().catch(error => {
-console.error('Fatal error:', error)
-process.exit(1)
-})
+  console.error("Fatal error:", error);
+  process.exit(1);
+});
 
-// Better error handling
-process.on('uncaughtException', (err) => {
-console.error('Uncaught Exception:', err)
-// Don't exit immediately to allow reconnection
-})
+// Prevent bot from stopping
+process.on("uncaughtException", err => {
+  console.error("Uncaught Exception:", err);
+});
 
-process.on('unhandledRejection', (err) => {
-console.error('Unhandled Rejection:', err)
-// Don't exit immediately to allow reconnection
-})
+process.on("unhandledRejection", err => {
+  console.error("Unhandled Rejection:", err);
+});
 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
@@ -290,11 +286,4 @@ console.log(chalk.redBright(Update ${__filename}))
 delete require.cache[file]
 require(file)
 })
-// Start the Express server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
-app.get('/', (req, res) => {
-    res.send("Bot is running...");
-});
 
