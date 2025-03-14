@@ -1,8 +1,10 @@
+# Use a lightweight Node.js image
 FROM node:18-slim
 
+# Set working directory
 WORKDIR /app
 
-# Install required packages
+# Install required system dependencies
 RUN apt-get update && \
     apt-get install -y \
     git \
@@ -15,14 +17,16 @@ RUN apt-get update && \
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --production
 
 # Copy project files
 COPY . .
 
 # Create session directory with full permissions
-RUN mkdir -p session && \
-    chmod -R 777 session
+RUN mkdir -p session && chmod -R 777 session
 
-# Start the bot
+# Expose the port (if needed for a web server)
+EXPOSE 3000  
+
+# Start the bot without readline issue
 CMD ["node", "index.js"]
