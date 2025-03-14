@@ -20,9 +20,7 @@ const express = require('express');
 const PORT = process.env.PORT || 3000;
 const app = express();
 // Keep Alive Route
-app.get('/', (req, res) => {
-    res.send("Bot is running...");
-});
+
 
 const { handleMessages, handleGroupParticipantUpdate, handleStatus } = require('./main');
 const PhoneNumber = require('awesome-phonenumber')
@@ -74,7 +72,8 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 
 async function startXeonBotInc() {
 let { version, isLatest } = await fetchLatestBaileysVersion()
-const { state, saveCreds } = await useMultiFileAuthState(./session)
+const { state, saveCreds } =
+ await useMultiFileAuthState(./session)
 const msgRetryCounterCache = new NodeCache()
 
 const XeonBotInc = makeWASocket({  
@@ -294,5 +293,8 @@ require(file)
 // Start the Express server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+app.get('/', (req, res) => {
+    res.send("Bot is running...");
 });
 
