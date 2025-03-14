@@ -65,7 +65,7 @@ global.themeemoji = "•"
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
 
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
+//const rl =
 const question = (text) => new Promise((resolve) => rl.question(text, resolve))
          
 async function startXeonBotInc() {
