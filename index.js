@@ -17,6 +17,7 @@ const FileType = require('file-type')
 const path = require('path')
 const axios = require('axios')
 const express = require('express');
+const PORT = process.env.PORT || 3000;
 // Keep Alive Route
 app.get('/', (req, res) => {
     res.send("Bot is running...");
