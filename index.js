@@ -43,7 +43,7 @@ const {
 } = require("@whiskeysockets/baileys")
 const NodeCache = require("node-cache")
 const pino = require("pino")
-const readline = require("readline")
+//const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 const { PHONENUMBER_MCC } = require('@whiskeysockets/baileys/lib/Utils/generics')
 const { rmSync, existsSync } = require('fs')
