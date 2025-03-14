@@ -18,6 +18,7 @@ const path = require('path')
 const axios = require('axios')
 const express = require('express');
 const PORT = process.env.PORT || 3000;
+cost app = express();
 // Keep Alive Route
 app.get('/', (req, res) => {
     res.send("Bot is running...");
@@ -73,7 +74,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 
 async function startXeonBotInc() {
 let { version, isLatest } = await fetchLatestBaileysVersion()
-const { state, saveCreds } = await useMultiFileAuthState(/session)
+const { state, saveCreds } = await useMultiFileAuthState(/.session)
 const msgRetryCounterCache = new NodeCache()
 
 const XeonBotInc = makeWASocket({  
