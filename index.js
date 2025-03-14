@@ -65,8 +65,7 @@ global.themeemoji = "•"
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
 
-//const rl =
-const question = (text) => new Promise((resolve) => rl.question(text, resolve))
+//const rl =🤝🤝🤝
          
 async function startXeonBotInc() {
     let { version, isLatest } = await fetchLatestBaileysVersion()
